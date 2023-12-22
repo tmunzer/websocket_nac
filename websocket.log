@@ -1,3 +1,0 @@
-2023-11-14 15:42:35,431 Starting new HTTPS connection (1): api.mist.com:443
-2023-11-14 15:42:36,383 https://api.mist.com:443 "POST /api/v1/sites/f5fcbee5-fbca-45b3-8bf1-1619ede87879/devices/00000000-0000-0000-1000-2c21311c37b0/shell HTTP/1.1" 200 301
-2023-11-14 15:42:36,908 Using selector: KqueueSelector
