@@ -1,3 +1,13 @@
+"""
+-------------------------------------------------------------------------------
+
+    Written by Thomas Munzer (tmunzer@juniper.net)
+    Github repository: https://github.com/tmunzer/websocket_nac/
+
+    This script is licensed under the MIT License.
+
+-------------------------------------------------------------------------------
+"""
 import logging
 import sys
 import socket
