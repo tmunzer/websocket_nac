@@ -101,6 +101,7 @@ from mist_acct_syslog import SyslogAcct
 from mist_acct_radius import RadiusAcct
 
 ENV_FILE = "~/.mist_env"
+LOG_FILE = ""
 # Can be save in the env file
 MIST_HOST = "api.mist.com"
 MIST_APITOKEN = ""
@@ -427,7 +428,6 @@ if __name__ == "__main__":
             assert False, "unhandled option"
 
     #### LOGS ####
-    LOG_FILE = "./syslog.log"
     SCRIPT_LOGGER = logging.getLogger(__name__)
     SCRIPT_LOGGER.setLevel(logging.DEBUG)
     if LOG_FILE:
