@@ -36,49 +36,44 @@ information about the available parameters).
 
 -------
 Script Parameters:
--h, --help                  display this help
+-h, --help               display this help
 
---ppsk_sync_org             Enable Mist Org PPSK synchronisation. 
-                            Used to set the client username with the PPSK name
---ppsk_sync_sites           Enable Mist Sites PPSK synchronisation. 
-                            Used to set the client username with the PPSK name
---ppsk_sync_interval=       Interval between PPSK synchronisations,
-                            in secondes
-                            default is 3600
+--ppsk_sync_org         Enable Mist Org PPSK synchronisation. 
+                        Used to set the client username with the PPSK name
+--ppsk_sync_sites       Enable Mist Sites PPSK synchronisation. 
+                        Used to set the client username with the PPSK name
+--ppsk_interval=        Interval between PPSK synchronisations, in secondes
+                        default is 3600
 
---radius_server=            RADIUS Server IP Address where to send the Accounting
-                            messages to
-                            Setting this parameter is enabling RADIUS Accounting
---radius_port=              RADIUS Server Port where to send the Accounting
-                            messages to
-                            Default is 1813
---radius_secret=            RADIUS shared secret
-                            default is "secret"
+--radius_server=        RADIUS Server IP Address where to send the Accounting messages to
+                        Setting this parameter is enabling RADIUS Accounting
+--radius_port=          RADIUS Server Port where to send the Accounting messages to
+                        default is 1813
+--radius_secret=        RADIUS shared secret
+                        default is "secret"
 
---syslog_server=            SYSLOG Server IP Address where to send the Accounting
-                            messages to
-                            Setting this parameter is enabling SYSLOG Accounting
---syslog_port=              RADIUS Server Port where to send the Accounting
-                            SYSLOG to
-                            Default is 514
+--syslog_server=        SYSLOG Server IP Address where to send the Accounting messages to
+                        Setting this parameter is enabling SYSLOG Accounting
+--syslog_port=          RADIUS Server Port where to send the Accounting SYSLOG to
+                        Default is 514
 
---interim_acct_interval=    Interval between each ACCT INTERIM Message, in
-                            seconds. 0 to disable ACCT INTERIM Messages.
-                            Default is 60
+--interim_interval=     Interval between each ACCT INTERIM Message, in seconds. 
+                        0 to disable ACCT INTERIM Messages.
+                        Default is 60
 
---client_timeout=           Duration before marking a client as disconnected if Mist
-                            is no more sending update, in seconds.
-                            Once a client is marked as disconnected, an ACCT Stop 
-                            message will be sent and the client data will be removed
-                            minimum: 120
-                            maximum: 3600
-                            default: 120
+--client_timeout=       Duration before marking a client as disconnected if Mist is no
+                        more sending update, in seconds.
+                        Once a client is marked as disconnected, an ACCT Stop message
+                        will be sent and the client data will be removed
+                        minimum: 120
+                        maximum: 3600
+                        default: 120
 
--l, --log_file=             define the filepath/filename where to write the logs. If not 
-                            set, logs are displayed on the console
--e, --env=                  define the env file to use (see mistapi env file documentation
-                            here: https://pypi.org/project/mistapi/)
-                            default is "~/.mist_env"
+-l, --log_file=         define the filepath/filename where to write the logs. If not 
+                        set, logs are displayed on the console
+-e, --env=              define the env file to use (see mistapi env file documentation
+                        here: https://pypi.org/project/mistapi/)
+                        default is "~/.mist_env"
 
 -------
 Examples:
@@ -317,49 +312,44 @@ information about the available parameters).
 
 -------
 Script Parameters:
--h, --help                  display this help
+-h, --help               display this help
 
---ppsk_sync_org             Enable Mist Org PPSK synchronisation. 
-                            Used to set the client username with the PPSK name
---ppsk_sync_sites           Enable Mist Sites PPSK synchronisation. 
-                            Used to set the client username with the PPSK name
---ppsk_sync_interval=       Interval between PPSK synchronisations,
-                            in secondes
-                            default is 3600
+--ppsk_sync_org         Enable Mist Org PPSK synchronisation. 
+                        Used to set the client username with the PPSK name
+--ppsk_sync_sites       Enable Mist Sites PPSK synchronisation. 
+                        Used to set the client username with the PPSK name
+--ppsk_interval=        Interval between PPSK synchronisations, in secondes
+                        default is 3600
 
---radius_server=            RADIUS Server IP Address where to send the Accounting
-                            messages to
-                            Setting this parameter is enabling RADIUS Accounting
---radius_port=              RADIUS Server Port where to send the Accounting
-                            messages to
-                            Default is 1813
---radius_secret=            RADIUS shared secret
-                            default is "secret"
+--radius_server=        RADIUS Server IP Address where to send the Accounting messages to
+                        Setting this parameter is enabling RADIUS Accounting
+--radius_port=          RADIUS Server Port where to send the Accounting messages to
+                        default is 1813
+--radius_secret=        RADIUS shared secret
+                        default is "secret"
 
---syslog_server=            SYSLOG Server IP Address where to send the Accounting
-                            messages to
-                            Setting this parameter is enabling SYSLOG Accounting
---syslog_port=              RADIUS Server Port where to send the Accounting
-                            SYSLOG to
-                            Default is 514
+--syslog_server=        SYSLOG Server IP Address where to send the Accounting messages to
+                        Setting this parameter is enabling SYSLOG Accounting
+--syslog_port=          RADIUS Server Port where to send the Accounting SYSLOG to
+                        Default is 514
 
---interim_acct_interval=    Interval between each ACCT INTERIM Message, in
-                            seconds. 0 to disable ACCT INTERIM Messages.
-                            Default is 60
+--interim_interval=     Interval between each ACCT INTERIM Message, in seconds. 
+                        0 to disable ACCT INTERIM Messages.
+                        Default is 60
 
---client_timeout=           Duration before marking a client as disconnected if Mist
-                            is no more sending update, in seconds.
-                            Once a client is marked as disconnected, an ACCT Stop 
-                            message will be sent and the client data will be removed
-                            minimum: 120
-                            maximum: 3600
-                            default: 120
+--client_timeout=       Duration before marking a client as disconnected if Mist is no
+                        more sending update, in seconds.
+                        Once a client is marked as disconnected, an ACCT Stop message
+                        will be sent and the client data will be removed
+                        minimum: 120
+                        maximum: 3600
+                        default: 120
 
--l, --log_file=             define the filepath/filename where to write the logs. If not 
-                            set, logs are displayed on the console
--e, --env=                  define the env file to use (see mistapi env file documentation
-                            here: https://pypi.org/project/mistapi/)
-                            default is "~/.mist_env"
+-l, --log_file=         define the filepath/filename where to write the logs. If not 
+                        set, logs are displayed on the console
+-e, --env=              define the env file to use (see mistapi env file documentation
+                        here: https://pypi.org/project/mistapi/)
+                        default is "~/.mist_env"
 
 -------
 Examples:
@@ -382,13 +372,13 @@ if __name__ == "__main__":
                 "log_file=",
                 "ppsk_sync_org",
                 "ppsk_sync_sites",
-                "ppsk_sync_interval=",
+                "ppsk_interval=",
                 "radius_server=",
                 "radius_port=",
                 "radius_secret=",
                 "syslog_server=",
                 "syslog_port=",
-                "interim_acct_interval=",
+                "interim_interval=",
                 "client_timeout=",
             ],
         )
@@ -406,7 +396,7 @@ if __name__ == "__main__":
             PPSK_SYNC_ORG = True
         elif o == "--ppsk_sync_sites":
             PPSK_SYNC_SITES = True
-        elif o == "--ppsk_sync_interval":
+        elif o == "--ppsk_interval":
             PPSK_SYNC_INTERVAL = a
         elif o == "--radius_server":
             RADIUS_SERVER = a
@@ -420,7 +410,7 @@ if __name__ == "__main__":
             SYSLOG_ENABLED = True
         elif o == "--syslog_port":
             SYSLOG_PORT = a
-        elif o == "--interim_acct_interval":
+        elif o == "--interim_interval":
             INTERIM_ACCT_INTERVAL = a
         elif o == "--client_timeout":
             CLIENT_TIMEOUT = a
