@@ -78,29 +78,34 @@ class SyslogAcct:
 
     def __init__(self, enabled:bool, syslog_server: str, syslog_port: int) -> None:
         self.enabled = enabled
-        self.logger = logging.getLogger("Mist Syslog Logger")
+        time_format = "%B %d %H:%M:%S"
+        formatter = logging.Formatter(fmt='%(asctime)s %(name)s %(levelname)s: %(message)s', datefmt=time_format)
+        self.logger = logging.getLogger("mist_accounting")
         self.logger.setLevel(logging.DEBUG)
         self.handler = logging.handlers.SysLogHandler(
             address=(syslog_server, syslog_port)
         )
+        self.handler.setFormatter(formatter)
         self.logger.addHandler(self.handler)
         self.logger.debug("process starter")
 
-    def _generate_syslog_message(self, status:str, client:MistClient):
+    def _format_mac(self, mac:str) -> str:
+        mac_parts = []
+        for i in range(0, 6):
+            mac_parts.append(mac[2*i: 2*(i+1)])
+        return ":".join(mac_parts)
+
+    def _generate_syslog_message(self, client:MistClient):
         """
         generate the syslog message based on the message to send.
         Available variables are listed above
         """
-        if status == "start":
-            return f"Login events—[{datetime.now()}] Userauthentication success User:{client.username} IP:{client.ip}"
-        elif status == "stop":
-            return f"Logout events—[{datetime.now()}] Userauthentication success User:{client.username} IP:{client.ip}"
-        else:
-            return f"Update events—[{datetime.now()}] Userauthentication success User:{client.username} IP:{client.ip}"
-
+        return f"\"apMac\"=\"{self._format_mac(client.ap_mac)}\", \"clientMac\"=\"{self._format_mac(client.mac)}\", \"clientIP\"=\"{client.ip}\", \"userName\"=\"{client.username}\""
+        
     def _send_packet(self, acct_message: str):
         try:
             self.logger.info(acct_message)
+            SCRIPT_LOGGER.info(acct_message)
         except socket.error as error:
             SCRIPT_LOGGER.error("Network error: " + error)
             sys.exit(1)
@@ -112,8 +117,7 @@ class SyslogAcct:
         send a message when a client connects
         """
         if self.enabled:
-            syslog_message = self._generate_syslog_message("start", client)
-            SCRIPT_LOGGER.info(f"start: {syslog_message}")
+            syslog_message = "User Login, " + self._generate_syslog_message(client)
             self._send_packet(syslog_message)
 
     def stop(self, client: MistClient):
@@ -121,8 +125,7 @@ class SyslogAcct:
         send a message when a client diconnects
         """
         if self.enabled:
-            syslog_message = self._generate_syslog_message("stop", client)
-            SCRIPT_LOGGER.info(f"stop: {syslog_message}")
+            syslog_message = "User Logout, " + self._generate_syslog_message(client)
             self._send_packet(syslog_message)
 
     def update(self, client: MistClient):
@@ -132,6 +135,5 @@ class SyslogAcct:
         Interim-Update will be sent we required by interim_update function
         """
         if self.enabled:
-            syslog_message = self._generate_syslog_message("update", client)
-            SCRIPT_LOGGER.info(f"update: {syslog_message}")
+            syslog_message = "User Update, " + self._generate_syslog_message(client)
             self._send_packet(syslog_message)
