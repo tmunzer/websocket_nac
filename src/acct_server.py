@@ -74,8 +74,8 @@ Script Parameters:
                             maximum: 3600
                             default: 120
 
--l, --log_file=             define the filepath/filename where to write the logs
-                            default is "./script.log"
+-l, --log_file=             define the filepath/filename where to write the logs. If not 
+                            set, logs are displayed on the console
 -e, --env=                  define the env file to use (see mistapi env file documentation
                             here: https://pypi.org/project/mistapi/)
                             default is "~/.mist_env"
@@ -354,8 +354,8 @@ Script Parameters:
                             maximum: 3600
                             default: 120
 
--l, --log_file=             define the filepath/filename where to write the logs
-                            default is "./script.log"
+-l, --log_file=             define the filepath/filename where to write the logs. If not 
+                            set, logs are displayed on the console
 -e, --env=                  define the env file to use (see mistapi env file documentation
                             here: https://pypi.org/project/mistapi/)
                             default is "~/.mist_env"

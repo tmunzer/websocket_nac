@@ -17,8 +17,57 @@ from mist_orchestrator import MistClient
 SCRIPT_LOGGER = logging.getLogger(__name__)
 SCRIPT_LOGGER.setLevel(logging.DEBUG)
 
-###############################################################################
-## SYSLOG ACCOUNTING
+"""
+Available SYSLOG fields
+-- user info
+NOTE: if PPSK_SYNC is enabled, ppsk_name will be set as client.username
+client.psk_id
+client.username
+-- info
+client.dual_band
+client.family
+client.group
+client.hostname
+client.ip
+client.is_guest
+client.mac
+client.manufacture
+client.model
+client.os
+client.vlan_id
+-- ap info
+client.ap_id
+client.ap_mac
+client.bssid
+client.site_id
+-- wlan info
+client.ssid
+client.wlan_id
+-- association info
+client.assoc_time
+client.band
+client.channel
+client.idle_time
+client.key_mgmt
+client.last_seen
+client.proto
+client.rssi
+client.snr
+client.uptime
+_ttl
+-- accounting info
+client.tx_rate
+client.rx_rate
+client.tx_pkts
+client.rx_pkts
+client.tx_bytes
+client.rx_bytes
+client.tx_retries
+client.rx_retries
+client.tx_bps
+client.rx_bps
+"""
+
 class SyslogAcct:
     """
     class to manage and process RADIUS data:
@@ -41,62 +90,13 @@ class SyslogAcct:
         """
         generate the syslog message based on the message to send.
         Available variables are listed above
-
-        Available SYSLOG fields
-        -- user info
-        NOTE: if PPSK_SYNC is enabled, ppsk_name will be set as client.username
-        client.psk_id
-        client.username
-        -- info
-        client.dual_band
-        client.family
-        client.group
-        client.hostname
-        client.ip
-        client.is_guest
-        client.mac
-        client.manufacture
-        client.model
-        client.os
-        client.vlan_id
-        -- ap info
-        client.ap_id
-        client.ap_mac
-        client.bssid
-        client.site_id
-        -- wlan info
-        client.ssid
-        client.wlan_id
-        -- association info
-        client.assoc_time
-        client.band
-        client.channel
-        client.idle_time
-        client.key_mgmt
-        client.last_seen
-        client.proto
-        client.rssi
-        client.snr
-        client.uptime
-        _ttl
-        -- accounting info
-        client.tx_rate
-        client.rx_rate
-        client.tx_pkts
-        client.rx_pkts
-        client.tx_bytes
-        client.rx_bytes
-        client.tx_retries
-        client.rx_retries
-        client.tx_bps
-        client.rx_bps
         """
         if status == "start":
             return f"Login events—[{datetime.now()}] Userauthentication success User:{client.username} IP:{client.ip}"
         elif status == "stop":
             return f"Logout events—[{datetime.now()}] Userauthentication success User:{client.username} IP:{client.ip}"
         else:
-            return f"Login events—[{datetime.now()}] Userauthentication success User:{client.username} IP:{client.ip}"
+            return f"Update events—[{datetime.now()}] Userauthentication success User:{client.username} IP:{client.ip}"
 
     def _send_packet(self, acct_message: str):
         try:

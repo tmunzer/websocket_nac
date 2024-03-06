@@ -9,7 +9,6 @@
 -------------------------------------------------------------------------------
 """
 import logging
-from datetime import datetime
 from mist_psks import MistPsks
 from mist_client import MistClient
 
@@ -141,12 +140,12 @@ class MistOrcherstator:
         for client_mac in list(self.clients):
             client: MistClient = self.clients[client_mac]
             if client.check_disconnect(self.client_timeout):
-                print(
+                SCRIPT_LOGGER.debug(
                     f"RUNTIME Update - last update for {client_mac} is more than {self.client_timeout}s ago. Sending Acct-Stop and cleaning client data"
                 )
                 interim["stop"].append(client)
             elif client.check_update_required(self.interim_update):
-                print(
+                SCRIPT_LOGGER.debug(
                     f"RUNTIME Update - last interim update for {client_mac} was sent more than {self.interim_update}s ago. Sending Interim-Update"
                 )
                 interim["update"].append(client)
