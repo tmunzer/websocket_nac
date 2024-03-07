@@ -153,40 +153,41 @@ class MistSocket:
             PPSK_SYNC_SITES,
             PPSK_SYNC_INTERVAL
         )
-        # Create and Start the Websocket in a Thread
-        self.ws = websocket.WebSocketApp(
-                    f"wss://{mist_ws_host}/api-ws/v1/stream",
-                    header={"Authorization": f"Token {mist_apitoken}"},
-                    on_message = lambda ws,msg: self.on_message(ws, msg),
-                    on_error   = lambda ws,msg: self.on_error(ws, msg),
-                    on_close   = lambda ws:     self.on_close(ws),
-                    on_open    = lambda ws:     self.on_open(ws)
-        )
-        self.wst = threading.Thread(target=self.ws.run_forever)
-        self.wst.daemon = True
-
         while True:
+            # Create and Start the Websocket in a Thread
+            self.ws = websocket.WebSocketApp(
+                        f"wss://{mist_ws_host}/api-ws/v1/stream",
+                        header={"Authorization": f"Token {mist_apitoken}"},
+                        on_message = lambda ws,msg: self.on_message(ws, msg),
+                        on_error   = lambda ws,msg: self.on_error(ws, msg),
+                        on_close   = lambda ws:     self.on_close(ws),
+                        on_open    = lambda ws:     self.on_open(ws)
+            )
+            self.wst = threading.Thread(target=self.ws.run_forever)
+            self.wst.daemon = True
             self.start_ws()
-        
+
     def start_ws(self, conn_timeout:int=5):
         """
         start the websocket, wait for the connection to establish, and start the infinite
         loop to process the update functions
         """
         self.wst.start()
-        sleep(1)
-        while not self.ws.sock.connected and conn_timeout:
-            conn_timeout -= 1
-            sleep(1)
+        try:
+            while not self.ws.sock.connected and conn_timeout:
+                conn_timeout -= 1
+                sleep(1)
 
-        # Start the loop to check client udpates/timeouts
-        while self.ws.sock.connected:
-            sleep(1)
-            interim_data = self.mist_orchestrator.chron()
-            for entry in interim_data.get("stop", []):
-                self._acct_stop(entry)
-            for entry in interim_data.get("update",[]):
-                self._acct_update(entry)
+            # Start the loop to check client udpates/timeouts
+            while self.ws.sock.connected and conn_timeout:
+                sleep(1)
+                interim_data = self.mist_orchestrator.chron()
+                for entry in interim_data.get("stop", []):
+                    self._acct_stop(entry)
+                for entry in interim_data.get("update",[]):
+                    self._acct_update(entry)
+        except:
+            self.ws.close()
 
 
     def _acct_start(self, client:MistClient):
